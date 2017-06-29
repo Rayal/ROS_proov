@@ -34,4 +34,19 @@
     <remap from="image" to="/camera/depth/image_raw"/>
     <remap from="scan" to="/scan"/>
   </node>
+
+  <arg name="camera" default="/camera/rgb/image_raw"/>
+
+  <node ns="$(arg camera)" pkg="image_proc" type="image_proc" name="image_proc"/>
+  <node pkg="viso2_ros" type="mono_odometer" name="mono_odometer">
+    <remap from="mono" to="$(arg camera)"/>
+    <remap from="image" to="image_rect"/>
+    <param name="base_link_frame_id" value="$(arg camera)"/>
+  </node>
+
+  <node pkg="turtlebot_teleop" type="turtlebot_teleop_key" name="turtlebot_teleop_keyboard"  output="screen">
+    <param name="scale_linear" value="0.5" type="double"/>
+    <param name="scale_angular" value="1.5" type="double"/>
+    <remap from="turtlebot_teleop_keyboard/cmd_vel" to="cmd_vel_mux/input/teleop"/>
+
 </launch>
