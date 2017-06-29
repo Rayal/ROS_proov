@@ -2,16 +2,16 @@
 <launch>
 
 	<!-- Arguments -->
-  <arg name="camera" default="/camera/rgb/image_raw"/>
+  <arg name="camera" default="/camera/rgb"/>
 
   <!-- Run the stereo image proc -->
-  <node ns="$(arg camera)" pkg="image_proc" type="image_proc" name="image_proc" />
 
   <!-- Viso2 -->
   <node pkg="viso2_ros" type="mono_odometer" name="mono_odometer">
     <remap from="mono" to="$(arg camera)"/>
-    <remap from="image" to="image_rect"/>
-    <param name="base_link_frame_id" value="$(arg camera)"/>
+    <remap from="image" to="$(arg camera)/image_raw"/>
+    <param name="odom_frame_id" value="/odom"/>
+    <param name="base_link_frame_id" value="/base_footprint"/>
   </node>
 
 </launch>
