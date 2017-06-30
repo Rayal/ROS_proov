@@ -8,8 +8,7 @@
 
   <!-- Viso2 -->
   <node pkg="viso2_ros" type="mono_odometer" name="mono_odometer">
-    <remap from="mono" to="$(arg camera)"/>
-    <remap from="image" to="$(arg camera)/image_raw"/>
+    <remap from="image" to="$(arg camera)/image_rect"/>
     <param name="odom_frame_id" value="/odom"/>
     <param name="base_link_frame_id" value="/base_footprint"/>
   </node>
