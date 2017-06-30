@@ -18,3 +18,4 @@ src/viso2/libviso2/libviso2/build
 */src/*/_*_.py
 */src/*/_*_.pyc
 */src/*/srv
+*.swp
